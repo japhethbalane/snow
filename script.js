@@ -60,13 +60,13 @@ function drawWorld() {
 		};
 	};
 
-	if (spawn1 && nsnows.length < 100) {
+	if (spawn1 && nsnows.length < 50) {
 		nsnows.push(new nearSnow());
 	};
 	if (spawn2 && fsnows.length < 500) {
 		fsnows.push(new farSnow());
 	};
-	if (spawn3 && msnows.length < 800) {
+	if (spawn3 && msnows.length < 1000) {
 		msnows.push(new midSnow());
 	};
 }
@@ -74,8 +74,8 @@ function drawWorld() {
 function drawArea() {
 	context.fillStyle = "#cccccc";
 	context.fillRect(0, canvas.height - 200, canvas.width, 200);
-	context.fillStyle = "#000000";
-	context.fillRect(0,canvas.height-200,canvas.width,0.2);
+	context.fillStyle = "#ffffff";
+	context.fillRect(0,canvas.height-200,canvas.width,0.5);
 }
 
 function clearCanvas() {
