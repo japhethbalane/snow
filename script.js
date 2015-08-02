@@ -8,9 +8,10 @@ var nsnows = [];
 var fsnows = [];
 var msnows = [];
 
-generateNearSnow(100);
-generateMidSnow(200);
-generateFarSnow(300);
+generateNearSnow(1);
+generateMidSnow(5);
+generateFarSnow(10);
+
 setInterval(drawWorld, 20);
 
 function generateMidSnow(snowCount) {
@@ -34,26 +35,51 @@ function generateFarSnow(snowCount) {
 function drawWorld() {
 	clearCanvas();
 	drawArea();
+	var spawn1, spawn2, spawn3;
+	spawn1 = spawn2 = spawn3 = false;
 
 	for (var i = 0; i < nsnows.length; i++) {
 		nsnows[i].update().draw();
+		if (nsnows[i].spawn) {
+			spawn1 = true;
+			nsnows[i].spawn = false;
+		};
 	};
 	for (var i = 0; i < fsnows.length; i++) {
 		fsnows[i].update().draw();
+		if (fsnows[i].spawn) {
+			spawn2 = true;
+			fsnows[i].spawn = false;
+		};
 	};
 	for (var i = 0; i < msnows.length; i++) {
 		msnows[i].update().draw();
+		if (msnows[i].spawn) {
+			spawn3 = true;
+			msnows[i].spawn = false;
+		};
 	};
 
+	if (spawn1 && nsnows.length < 100) {
+		nsnows.push(new nearSnow());
+	};
+	if (spawn2 && fsnows.length < 600) {
+		fsnows.push(new farSnow());
+	};
+	if (spawn3 && msnows.length < 500) {
+		msnows.push(new midSnow());
+	};
 }
 
 function drawArea() {
-	context.fillStyle = "#ddccdd";
+	context.fillStyle = "#cccccc";
 	context.fillRect(0, canvas.height - 200, canvas.width, 200);
+	context.fillStyle = "#000000";
+	context.fillRect(0,canvas.height-200,canvas.width,0.2);
 }
 
 function clearCanvas() {
-	context.fillStyle = "#114245";
+	context.fillStyle = "#aabaa9";
 	context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
@@ -65,6 +91,7 @@ function nearSnow() {
 	this.x = randomBetween(0, canvas.width);
 	this.y = randomBetween(0, canvas.height);
 	this.radius = randomBetween(2,4);
+	this.spawn = false;
 
 	this.update = function() {
 		this.y++;
@@ -73,6 +100,7 @@ function nearSnow() {
 		if (this.y > canvas.height) {
 			this.y = 0;
 			this.radius = randomBetween(2,4);
+			this.spawn = true;
 		};
 
 		if (this.x < 0) {
@@ -99,7 +127,8 @@ function nearSnow() {
 function farSnow() {
 	this.x = randomBetween(0, canvas.width);
 	this.y = randomBetween(0, canvas.height-200);
-	this.radius = randomBetween(0.5,2);
+	this.radius = randomBetween(0.5,1);
+	this.spawn = false;
 
 	this.update = function() {
 		this.y += 0.4;
@@ -107,12 +136,13 @@ function farSnow() {
 
 		if (this.y > canvas.height - 200) {
 			this.y = 0;
-			this.radius = randomBetween(0.5,2);
+			this.radius = randomBetween(0.5,1);
+			this.spawn = true;
 		};
 
 		if (this.x < 0) {
 			this.x = canvas.width;
-			this.radius = randomBetween(0.5,2);
+			this.radius = randomBetween(0.5,1);
 		};
 
 		return this;
@@ -133,21 +163,24 @@ function farSnow() {
 
 function midSnow() {
 	this.x = randomBetween(0, canvas.width);
-	this.y = randomBetween(0, canvas.height-200);
-	this.radius = randomBetween(1,2);
+	this.y = randomBetween(0, canvas.height-100);
+	this.radius = randomBetween(1,3);
+	this.spawn = false;
+	this.stop = randomBetween(canvas.height-175,canvas.height-25);
 
 	this.update = function() {
 		this.y += 0.7;
 		this.x -= 3;
 
-		if (this.y > canvas.height - 100) {
+		if (this.y > this.stop) {
 			this.y = 0;
-			this.radius = randomBetween(1,2);
+			this.radius = randomBetween(1,3);
+			this.spawn = true;
 		};
 
 		if (this.x < 0) {
 			this.x = canvas.width;
-			this.radius = randomBetween(1,2);
+			this.radius = randomBetween(1,3);
 		};
 
 		return this;
