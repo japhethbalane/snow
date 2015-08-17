@@ -9,12 +9,15 @@ var fsnows = [];
 var msnows = [];
 var character;
 
-generateNearSnow(20);
-generateMidSnow(40);
-generateFarSnow(60);
+// generateNearSnow(20);
+// generateMidSnow(40);
+// generateFarSnow(60);
 generateCharacter();
 
 setInterval(drawWorld, 20);
+
+
+
 
 function generateMidSnow(snowCount) {
 	for (var i = 0; i < snowCount; i++) {
@@ -37,6 +40,9 @@ function generateFarSnow(snowCount) {
 function generateCharacter(){
 	character = new Character();
 }
+
+
+
 
 function drawWorld() {
 	clearCanvas();
@@ -65,6 +71,7 @@ function drawWorld() {
 	character.drawLeftCoat();
 	character.drawRightCoat();
 	character.drawCollar();
+	character.drawLines();
 	
 	for (var i = 0; i < nsnows.length; i++) {
 		nsnows[i].update().draw();
@@ -73,8 +80,6 @@ function drawWorld() {
 			nsnows[i].spawn = false;
 		};
 	};
-
-	// context.fillRect(canvas.width/2-30, canvas.height/2-140, 50,50);
 
 	if (spawn1 && nsnows.length < 100) {
 		nsnows.push(new nearSnow());
@@ -103,6 +108,8 @@ function randomBetween(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+
+
 function nearSnow() {
 	this.x = randomBetween(0, canvas.width);
 	this.y = randomBetween(0, canvas.height);
@@ -118,7 +125,7 @@ function nearSnow() {
 
 		if (this.snowCatch == 1) {
 			if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && 
-				this.y <= canvas.height-200 && this.y >= canvas.height/4+16) {
+				this.y <= canvas.height-250 && this.y >= canvas.height/4+16) {
 				this.stop = true;
 			};
 			if (this.x <= canvas.width/2+20 && this.x >= canvas.width/2-30 && 
@@ -260,9 +267,12 @@ function midSnow() {
 
 }
 
+
+
 function Character() {
 	this.x = canvas.width / 2;
 	this.y = canvas.height / 4;
+
 	this.drawBackground =function() {
 		context.beginPath();
 		context.moveTo(this.x, this.y);
@@ -284,12 +294,11 @@ function Character() {
 		context.lineTo(this.x+55, this.y+140);
 		context.lineTo(this.x+20, this.y+160);
 
-	    context.fillStyle = "rgba(130, 130, 130, 1)";
+	    context.fillStyle = "rgba(120, 120, 120, 1)";
 	    context.strokeStyle = "#999999";
 	    context.fill();
 		context.closePath();
 		context.stroke();
-
 	}
 	this.drawHood = function() {
 		context.beginPath();
@@ -298,7 +307,7 @@ function Character() {
 		context.lineTo(this.x-44, this.y+36);
 		context.lineTo(this.x-55, this.y+70);
 		context.lineTo(this.x-45, this.y+90);
-		context.lineTo(this.x-20, this.y+102);
+		context.lineTo(this.x-13, this.y+106);
 		context.lineTo(this.x-35, this.y+85);
 		context.lineTo(this.x-35, this.y+75);
 		context.lineTo(this.x-10, this.y+45);
@@ -310,34 +319,23 @@ function Character() {
 		context.lineTo(this.x+47, this.y+70);
 		context.lineTo(this.x+40, this.y+35);
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
-	    context.strokeStyle = "#dddddd";
+	    context.strokeStyle = "#ffffff";
 	    context.fill();
 		context.closePath();
 		context.stroke();
-
 	}
 	this.drawBody = function() {
 		context.beginPath();
 		context.moveTo(this.x-5, this.y+150);
 		context.lineTo(this.x-30, this.y+280);
 		context.lineTo(this.x-7, this.y+420);
-		context.lineTo(this.x-6, this.y+250);
 		context.lineTo(this.x-7, this.y+420);
 		context.lineTo(this.x+15, this.y+280);
-	    context.fillStyle = "rgba(150, 150, 150, 1)";
-	    context.strokeStyle = "#aaaaaa";
+	    context.fillStyle = "rgba(120, 120, 120, 1)";
+	    context.strokeStyle = "#666666";
 	    context.fill();
 		context.closePath();
-		context.stroke();;
-		context.beginPath();
-		context.moveTo(this.x-5, this.y+150);
-		context.lineTo(this.x-30, this.y+220);
-		context.lineTo(this.x+15, this.y+220);
-	    context.fillStyle = "rgba(140, 140, 140, 1)";
-	    context.strokeStyle = "#999999";
-	    context.fill();
-		context.closePath();
-		context.stroke();;
+		context.stroke();
 	}
 	this.drawLeftCoat = function() {
 		context.beginPath();
@@ -352,7 +350,7 @@ function Character() {
 		context.lineTo(this.x-45, this.y+130);
 		context.lineTo(this.x-37, this.y+125);
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
-	    context.strokeStyle = "#dddddd";
+	    context.strokeStyle = "#ffffff";
 	    context.fill();
 		context.closePath();
 		context.stroke();
@@ -368,7 +366,7 @@ function Character() {
 		context.lineTo(this.x+30, this.y+130);
 		context.lineTo(this.x+25, this.y+125);
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
-	    context.strokeStyle = "#dddddd";
+	    context.strokeStyle = "#ffffff";
 	    context.fill();
 		context.closePath();
 		context.stroke();
@@ -386,22 +384,63 @@ function Character() {
 		context.lineTo(this.x+55, this.y+140);
 		context.lineTo(this.x+30, this.y+120);
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
-	    context.strokeStyle = "#dddddd";
+	    context.strokeStyle = "#ffffff";
 	    context.fill();
 		context.closePath();
 		context.stroke();
 	}
+	this.drawLines = function() {
+		context.beginPath();
+
+		context.moveTo(this.x+15, this.y+40);
+		context.lineTo(this.x, this.y);
+		context.lineTo(this.x-11, this.y+30);
+		context.lineTo(this.x-10, this.y+45);
+		context.lineTo(this.x-29, this.y+16);
+		context.lineTo(this.x-40, this.y+40);
+		context.moveTo(this.x-40, this.y+40);		
+		context.lineTo(this.x-10, this.y+45);
+		context.lineTo(this.x-35, this.y+60);
+		context.lineTo(this.x-45, this.y+90);
+		context.moveTo(this.x-44, this.y+36);
+		context.lineTo(this.x-40, this.y+40);
+		context.lineTo(this.x-35, this.y+60);
+		context.lineTo(this.x-55, this.y+70);
+		context.moveTo(this.x+40, this.y+35);
+		context.lineTo(this.x+15, this.y+40);
+		context.lineTo(this.x+5, this.y+50);
+		context.moveTo(this.x+40, this.y+35);
+		context.lineTo(this.x+37, this.y+58);
+		context.lineTo(this.x+30, this.y+85);
+		context.lineTo(this.x+28, this.y+65);
+		context.lineTo(this.x+15, this.y+40);
+		context.lineTo(this.x-11, this.y+30);
+		context.moveTo(this.x+37, this.y+58);
+		context.lineTo(this.x+47, this.y+70);
+		context.lineTo(this.x+30, this.y+85);
+		context.lineTo(this.x+27, this.y+98);
+		context.moveTo(this.x+27, this.y+97);
+		context.lineTo(this.x+15, this.y+95);
+		context.lineTo(this.x+10, this.y+104);
+		context.moveTo(this.x-35, this.y+75);
+		context.lineTo(this.x-42, this.y+78);
+		context.moveTo(this.x-28, this.y+92);
+		context.lineTo(this.x-45, this.y+90);
+
+		context.moveTo(this.x-5, this.y+140);
+		context.lineTo(this.x-18, this.y+120);
+		context.lineTo(this.x-35, this.y+105);
+		context.lineTo(this.x-43, this.y+120);
+		context.lineTo(this.x-53, this.y+110);
+		context.moveTo(this.x-53, this.y+110);
+		context.lineTo(this.x-59, this.y+130);
+
+		context.moveTo(this.x-18, this.y+119);
+		context.lineTo(this.x-30, this.y+127);
+
+	    context.fillStyle = "rgba(200, 200, 200, 1)";
+	    context.strokeStyle = "#ffffff";
+	    context.fill();
+		context.stroke();
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
