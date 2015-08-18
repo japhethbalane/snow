@@ -9,9 +9,9 @@ var fsnows = [];
 var msnows = [];
 var character;
 
-// generateNearSnow(20);
-// generateMidSnow(40);
-// generateFarSnow(60);
+generateNearSnow(1);
+generateMidSnow(15);
+generateFarSnow(20);
 generateCharacter();
 
 setInterval(drawWorld, 20);
@@ -46,7 +46,6 @@ function generateCharacter(){
 
 function drawWorld() {
 	clearCanvas();
-	drawArea();
 	var spawn1, spawn2, spawn3;
 	spawn1 = spawn2 = spawn3 = false;
 
@@ -57,6 +56,9 @@ function drawWorld() {
 			fsnows[i].spawn = false;
 		};
 	};
+	
+	drawArea();
+	
 	for (var i = 0; i < msnows.length; i++) {
 		msnows[i].update().draw();
 		if (msnows[i].spawn) {
@@ -84,7 +86,7 @@ function drawWorld() {
 	if (spawn1 && nsnows.length < 100) {
 		nsnows.push(new nearSnow());
 	};
-	if (spawn2 && fsnows.length < 500) {
+	if (spawn2 && fsnows.length < 700) {
 		fsnows.push(new farSnow());
 	};
 	if (spawn3 && msnows.length < 800) {
@@ -93,10 +95,27 @@ function drawWorld() {
 }
 
 function drawArea() {
+	context.beginPath();
+
+	context.moveTo(0, canvas.height);
+	context.lineTo(0, canvas.height - 200);
+	context.lineTo(100, canvas.height - 210);
+	context.lineTo(400, canvas.height - 190);
+	context.lineTo(550, canvas.height - 190);
+	context.lineTo(600, canvas.height - 200);
+	context.lineTo(800, canvas.height - 200);
+	context.lineTo(900, canvas.height - 205);
+	context.lineTo(950, canvas.height - 190);
+	context.lineTo(1100, canvas.height - 205);
+	context.lineTo(canvas.width, canvas.height - 195);
+	context.lineTo(canvas.width, canvas.height);
+
 	context.fillStyle = "#cccccc";
-	context.fillRect(0, canvas.height - 200, canvas.width, 200);
-	context.fillStyle = "#ffffff";
-	context.fillRect(0,canvas.height-200,canvas.width,0.5);
+	context.strokeStyle = "#ffffff";
+	context.closePath();
+	context.fill();
+
+	context.stroke();
 }
 
 function clearCanvas() {
@@ -216,7 +235,7 @@ function farSnow() {
 
 function midSnow() {
 	this.x = randomBetween(0, canvas.width);
-	this.y = randomBetween(0, canvas.height-500);
+	this.y = randomBetween(0, canvas.height);
 	this.radius = randomBetween(1,3);
 	this.spawn = false;
 	this.stop = randomBetween(canvas.height-175,canvas.height-25);
@@ -266,8 +285,6 @@ function midSnow() {
 	}
 
 }
-
-
 
 function Character() {
 	this.x = canvas.width / 2;
@@ -391,7 +408,7 @@ function Character() {
 	}
 	this.drawLines = function() {
 		context.beginPath();
-
+	{
 		context.moveTo(this.x+15, this.y+40);
 		context.lineTo(this.x, this.y);
 		context.lineTo(this.x-11, this.y+30);
@@ -426,7 +443,9 @@ function Character() {
 		context.lineTo(this.x-42, this.y+78);
 		context.moveTo(this.x-28, this.y+92);
 		context.lineTo(this.x-45, this.y+90);
+	}
 
+	{
 		context.moveTo(this.x-5, this.y+140);
 		context.lineTo(this.x-18, this.y+120);
 		context.lineTo(this.x-35, this.y+105);
@@ -434,9 +453,25 @@ function Character() {
 		context.lineTo(this.x-53, this.y+110);
 		context.moveTo(this.x-53, this.y+110);
 		context.lineTo(this.x-59, this.y+130);
-
-		context.moveTo(this.x-18, this.y+119);
+		context.moveTo(this.x-23, this.y+130);
+		context.lineTo(this.x-18, this.y+119);
 		context.lineTo(this.x-30, this.y+127);
+		context.moveTo(this.x-5, this.y+140);
+		context.lineTo(this.x+10, this.y+120);
+		context.lineTo(this.x+38, this.y+100);
+		context.moveTo(this.x+38, this.y+100);
+		context.lineTo(this.x+40, this.y+117);
+		context.lineTo(this.x+30, this.y+121);
+		context.moveTo(this.x+40, this.y+118);
+		context.lineTo(this.x+50, this.y+129);
+		context.moveTo(this.x+30, this.y+121);
+		context.lineTo(this.x+10, this.y+120);
+		context.lineTo(this.x+12, this.y+130);
+	}
+
+	{
+
+	}
 
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
 	    context.strokeStyle = "#ffffff";
