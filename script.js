@@ -559,40 +559,40 @@ function Character() {
 		}
 
 		{
-		context.moveTo(this.x-5, this.y+145);
-		context.lineTo(this.x-20, this.y+160);
-		context.lineTo(this.x-35, this.y+145);
-		context.lineTo(this.x-45, this.y+130);
-		context.moveTo(this.x-35, this.y+145);
-		context.lineTo(this.x-30, this.y+128);
-		context.moveTo(this.x-35, this.y+145);
-		context.lineTo(this.x-45, this.y+155);
-		context.lineTo(this.x-57, this.y+154);
-		context.moveTo(this.x-20, this.y+160);
-		context.lineTo(this.x-40, this.y+170);
-		context.lineTo(this.x-45, this.y+155);
-		context.moveTo(this.x-5, this.y+145);
-		context.lineTo(this.x-32, this.y+138);
+			context.moveTo(this.x-5, this.y+145);
+			context.lineTo(this.x-20, this.y+160);
+			context.lineTo(this.x-35, this.y+145);
+			context.lineTo(this.x-45, this.y+130);
+			context.moveTo(this.x-35, this.y+145);
+			context.lineTo(this.x-30, this.y+128);
+			context.moveTo(this.x-35, this.y+145);
+			context.lineTo(this.x-45, this.y+155);
+			context.lineTo(this.x-57, this.y+154);
+			context.moveTo(this.x-20, this.y+160);
+			context.lineTo(this.x-40, this.y+170);
+			context.lineTo(this.x-45, this.y+155);
+			context.moveTo(this.x-5, this.y+145);
+			context.lineTo(this.x-32, this.y+138);
 
-		context.moveTo(this.x-85, this.y+210);
-		context.lineTo(this.x-50, this.y+230);
-		context.lineTo(this.x-40, this.y+240);
-		context.lineTo(this.x-15, this.y+230);
-		context.lineTo(this.x-10, this.y+250);
-		context.lineTo(this.x-20, this.y+270);
+			context.moveTo(this.x-85, this.y+210);
+			context.lineTo(this.x-50, this.y+230);
+			context.lineTo(this.x-40, this.y+240);
+			context.lineTo(this.x-15, this.y+230);
+			context.lineTo(this.x-10, this.y+250);
+			context.lineTo(this.x-18, this.y+270);
 
-		context.moveTo(this.x-85, this.y+210);
-		context.lineTo(this.x-77, this.y+240);
-		context.lineTo(this.x-60, this.y+260);
-		context.lineTo(this.x-35, this.y+270);
-		context.lineTo(this.x-25, this.y+310);
+			context.moveTo(this.x-85, this.y+210);
+			context.lineTo(this.x-77, this.y+240);
+			context.lineTo(this.x-60, this.y+260);
+			context.lineTo(this.x-35, this.y+270);
+			context.lineTo(this.x-25, this.y+310);
 
-		context.moveTo(this.x-140, this.y+240);
-		context.lineTo(this.x-110, this.y+250);
-		context.lineTo(this.x-90, this.y+270);
-		context.lineTo(this.x-80, this.y+269);
-		context.lineTo(this.x-60, this.y+300);
-		context.lineTo(this.x-30, this.y+315);
+			context.moveTo(this.x-140, this.y+240);
+			context.lineTo(this.x-110, this.y+250);
+			context.lineTo(this.x-90, this.y+270);
+			context.lineTo(this.x-80, this.y+269);
+			context.lineTo(this.x-60, this.y+300);
+			context.lineTo(this.x-30, this.y+315);
 		}
 
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
