@@ -9,9 +9,9 @@ var fsnows = [];
 var msnows = [];
 var character;
 
-generateNearSnow(1);
-generateMidSnow(15);
-generateFarSnow(20);
+// generateNearSnow(1);
+// generateMidSnow(15);
+// generateFarSnow(20);
 generateCharacter();
 
 setInterval(drawWorld, 20);
@@ -166,7 +166,7 @@ function nearSnow() {
 	this.spawn = false;
 	this.snowCatch = randomBetween(1,25);
 	this.stop = false;
-	this.melt = 0
+	this.melt = 0;
 
 	this.update = function() {
 		this.y++;
@@ -514,7 +514,6 @@ function Character() {
 			context.moveTo(this.x+32, this.y+150);
 			context.lineTo(this.x+27, this.y+153);
 			context.lineTo(this.x+34, this.y+175);
-			context.lineTo(this.x+23, this.y+174);
 			context.lineTo(this.x+24, this.y+193);
 			context.lineTo(this.x+30, this.y+208);
 			context.lineTo(this.x+15, this.y+225);
@@ -551,9 +550,6 @@ function Character() {
 			context.lineTo(this.x+2, this.y+190);
 			context.lineTo(this.x+24, this.y+191);
 			context.lineTo(this.x+37, this.y+200);
-			context.lineTo(this.x+30, this.y+208);
-			context.lineTo(this.x+15, this.y+200);
-			context.lineTo(this.x+12, this.y+180);
 			context.moveTo(this.x+15, this.y+200);
 			context.lineTo(this.x+6, this.y+216);
 		}
@@ -562,7 +558,7 @@ function Character() {
 			context.moveTo(this.x-5, this.y+145);
 			context.lineTo(this.x-20, this.y+160);
 			context.lineTo(this.x-35, this.y+145);
-			context.lineTo(this.x-45, this.y+130);
+			context.lineTo(this.x-54, this.y+147);
 			context.moveTo(this.x-35, this.y+145);
 			context.lineTo(this.x-30, this.y+128);
 			context.moveTo(this.x-35, this.y+145);
@@ -575,24 +571,51 @@ function Character() {
 			context.lineTo(this.x-32, this.y+138);
 
 			context.moveTo(this.x-85, this.y+210);
-			context.lineTo(this.x-50, this.y+230);
+			context.lineTo(this.x-50, this.y+225);
 			context.lineTo(this.x-40, this.y+240);
-			context.lineTo(this.x-15, this.y+230);
-			context.lineTo(this.x-10, this.y+250);
-			context.lineTo(this.x-18, this.y+270);
+			context.lineTo(this.x-13, this.y+230);
 
 			context.moveTo(this.x-85, this.y+210);
 			context.lineTo(this.x-77, this.y+240);
 			context.lineTo(this.x-60, this.y+260);
 			context.lineTo(this.x-35, this.y+270);
-			context.lineTo(this.x-25, this.y+310);
+			context.lineTo(this.x-21, this.y+310);
 
 			context.moveTo(this.x-140, this.y+240);
 			context.lineTo(this.x-110, this.y+250);
 			context.lineTo(this.x-90, this.y+270);
 			context.lineTo(this.x-80, this.y+269);
 			context.lineTo(this.x-60, this.y+300);
-			context.lineTo(this.x-30, this.y+315);
+			context.lineTo(this.x-22, this.y+323);
+
+			context.moveTo(this.x-140, this.y+240);
+			context.lineTo(this.x-110, this.y+235);
+			context.lineTo(this.x-85, this.y+210);
+			context.moveTo(this.x-77, this.y+240);
+			context.lineTo(this.x-110, this.y+235);
+			context.lineTo(this.x-110, this.y+250);
+			context.lineTo(this.x-90, this.y+252);
+			context.lineTo(this.x-77, this.y+240);
+			context.moveTo(this.x-91, this.y+270);
+			context.lineTo(this.x-90, this.y+252);
+			context.lineTo(this.x-80, this.y+269);
+			context.moveTo(this.x-60, this.y+260);
+			context.lineTo(this.x-55, this.y+275);
+			context.lineTo(this.x-72, this.y+260);
+			context.lineTo(this.x-77, this.y+240);
+			context.moveTo(this.x-72, this.y+260);
+			context.lineTo(this.x-75, this.y+278);
+			context.moveTo(this.x-35, this.y+270);
+			context.lineTo(this.x-55, this.y+275);
+			context.lineTo(this.x-68, this.y+286);
+			context.moveTo(this.x-35, this.y+270);
+			context.lineTo(this.x-45, this.y+298);
+			context.lineTo(this.x-60, this.y+300);
+			context.moveTo(this.x-55, this.y+275);
+			context.lineTo(this.x-45, this.y+298);
+			
+			context.moveTo(this.x-42, this.y+288);
+			context.lineTo(this.x-35, this.y+293);
 		}
 
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
