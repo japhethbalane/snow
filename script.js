@@ -9,9 +9,9 @@ var fsnows = [];
 var msnows = [];
 var character;
 
-// generateNearSnow(1);
-// generateMidSnow(15);
-// generateFarSnow(20);
+generateNearSnow(1);
+generateMidSnow(15);
+generateFarSnow(20);
 generateCharacter();
 
 setInterval(drawWorld, 20);
@@ -565,29 +565,25 @@ function Character() {
 			context.lineTo(this.x-45, this.y+155);
 			context.lineTo(this.x-57, this.y+154);
 			context.moveTo(this.x-20, this.y+160);
-			context.lineTo(this.x-40, this.y+170);
+			context.lineTo(this.x-40, this.y+185);
 			context.lineTo(this.x-45, this.y+155);
 			context.moveTo(this.x-5, this.y+145);
 			context.lineTo(this.x-32, this.y+138);
-
 			context.moveTo(this.x-85, this.y+210);
 			context.lineTo(this.x-50, this.y+225);
 			context.lineTo(this.x-40, this.y+240);
 			context.lineTo(this.x-13, this.y+230);
-
 			context.moveTo(this.x-85, this.y+210);
 			context.lineTo(this.x-77, this.y+240);
 			context.lineTo(this.x-60, this.y+260);
 			context.lineTo(this.x-35, this.y+270);
 			context.lineTo(this.x-21, this.y+310);
-
 			context.moveTo(this.x-140, this.y+240);
 			context.lineTo(this.x-110, this.y+250);
 			context.lineTo(this.x-90, this.y+270);
 			context.lineTo(this.x-80, this.y+269);
 			context.lineTo(this.x-60, this.y+300);
 			context.lineTo(this.x-22, this.y+323);
-
 			context.moveTo(this.x-140, this.y+240);
 			context.lineTo(this.x-110, this.y+235);
 			context.lineTo(this.x-85, this.y+210);
@@ -624,10 +620,67 @@ function Character() {
 			context.moveTo(this.x-57, this.y+238);
 			context.lineTo(this.x-40, this.y+240);
 			context.lineTo(this.x-50, this.y+264);
-
+			context.moveTo(this.x-13, this.y+230);
+			context.lineTo(this.x-50, this.y+264);
+			context.moveTo(this.x-35, this.y+270);
+			context.lineTo(this.x-25, this.y+260);
+			context.lineTo(this.x-13, this.y+230);
+			context.moveTo(this.x-25, this.y+260);
+			context.lineTo(this.x-20, this.y+288);
+			context.moveTo(this.x-140, this.y+240);
+			context.lineTo(this.x-135, this.y+260);
+			context.lineTo(this.x-150, this.y+270);
+			context.moveTo(this.x-135, this.y+260);
+			context.lineTo(this.x-110, this.y+250);
+			context.moveTo(this.x-125, this.y+255);
+			context.lineTo(this.x-100, this.y+280);
+			context.lineTo(this.x-125, this.y+285);
+			context.lineTo(this.x-135, this.y+260);
+			context.moveTo(this.x-165, this.y+245);
+			context.lineTo(this.x-150, this.y+250);
+			context.lineTo(this.x-140, this.y+240);
+			context.moveTo(this.x-150, this.y+250);
+			context.lineTo(this.x-142, this.y+264);
+			context.moveTo(this.x-55, this.y+322);
+			context.lineTo(this.x-60, this.y+300);
+			context.lineTo(this.x-105, this.y+300);
+			context.lineTo(this.x-112, this.y+283);
+			context.moveTo(this.x-112, this.y+283);
+			context.lineTo(this.x-85, this.y+293);
+			context.lineTo(this.x-90, this.y+270);
+			context.moveTo(this.x-68, this.y+286);
+			context.lineTo(this.x-85, this.y+293);
+			context.lineTo(this.x-89, this.y+300);
+			context.lineTo(this.x-80, this.y+312);
+			context.moveTo(this.x-90, this.y+270);
+			context.lineTo(this.x-115, this.y+265);
+			context.moveTo(this.x-85, this.y+210);
+			context.lineTo(this.x-60, this.y+200);
+			context.lineTo(this.x-75, this.y+190);
+			context.lineTo(this.x-55, this.y+180);
+			context.lineTo(this.x-44, this.y+165);
+			context.moveTo(this.x-60, this.y+200);
+			context.lineTo(this.x-55, this.y+180);
+			context.lineTo(this.x-40, this.y+185);
+			context.lineTo(this.x-30, this.y+200);
+			context.lineTo(this.x-20, this.y+180);
+			context.lineTo(this.x-29, this.y+170);
+			context.moveTo(this.x-6, this.y+160);
+			context.lineTo(this.x-20, this.y+180);
+			context.lineTo(this.x-14, this.y+230);
+			context.moveTo(this.x-60, this.y+200);
+			context.lineTo(this.x-50, this.y+225);
+			context.lineTo(this.x-47, this.y+200);
+			context.lineTo(this.x-55, this.y+180);
+			context.moveTo(this.x-47, this.y+200);
+			context.lineTo(this.x-30, this.y+201);
+			context.lineTo(this.x-32, this.y+215);
+			context.lineTo(this.x-47, this.y+230);
+			context.moveTo(this.x-32, this.y+215);
+			context.lineTo(this.x-22, this.y+234);
 		}
 
-	    context.fillStyle = "rgba(200, 200, 200, 1)";
+	    context.fillStyle = "rgba(190, 200, 200, 1)";
 	    context.strokeStyle = "#eeeeee";
 	    context.fill();
 		context.stroke();
