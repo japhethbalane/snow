@@ -331,7 +331,6 @@ function Character() {
 		context.lineTo(this.x+38, this.y+93);
 		context.lineTo(this.x+47, this.y+70);
 		context.lineTo(this.x+40, this.y+35);
-
 		context.moveTo(this.x-5, this.y+160);
 		context.lineTo(this.x-30, this.y+165);
 		context.lineTo(this.x-75, this.y+140);
@@ -375,8 +374,9 @@ function Character() {
 		context.beginPath();
 		context.moveTo(this.x-5, this.y+150);
 		context.lineTo(this.x-30, this.y+280);
-		context.lineTo(this.x-7, this.y+420);
-		context.lineTo(this.x-7, this.y+420);
+		context.lineTo(this.x-10, this.y+420);
+		context.lineTo(this.x-7, this.y+422);
+		context.lineTo(this.x-4, this.y+420);
 		context.lineTo(this.x+15, this.y+280);
 	    context.fillStyle = "rgba(120, 120, 120, 1)";
 	    context.strokeStyle = "#666666";
