@@ -149,7 +149,8 @@ function drawArea() {
 }
 
 function clearCanvas() {
-	context.fillStyle = "#aabaa9";
+	// context.fillStyle = "#aabaa9";
+	context.fillStyle = "rgba(185,200,185,0.5)";
 	context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
