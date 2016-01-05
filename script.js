@@ -16,9 +16,6 @@ generateCharacter();
 
 setInterval(drawWorld, 20);
 
-
-
-
 function generateMidSnow(snowCount) {
 	for (var i = 0; i < snowCount; i++) {
 		msnows.push(new midSnow());
@@ -40,9 +37,6 @@ function generateFarSnow(snowCount) {
 function generateCharacter(){
 	character = new Character();
 }
-
-
-
 
 function drawWorld() {
 	clearCanvas();
@@ -158,8 +152,6 @@ function randomBetween(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
-
-
 function nearSnow() {
 	this.x = randomBetween(0, canvas.width);
 	this.y = randomBetween(0, canvas.height);
@@ -224,7 +216,6 @@ function nearSnow() {
 
 	    return this;
 	}
-
 }
 
 function farSnow() {
@@ -261,7 +252,6 @@ function farSnow() {
 
 	    return this;
 	}
-
 }
 
 function midSnow() {
@@ -314,7 +304,6 @@ function midSnow() {
 
 	    return this;
 	}
-
 }
 
 function Character() {
