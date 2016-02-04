@@ -60,23 +60,23 @@ function World() {
 		};
 	};
 	
-	// for (var i = 0; i < msnows.length; i++) {
-	// 	msnows[i].update().draw();
-	// 	if (msnows[i].spawn) {
-	// 		spawn3 = true;
-	// 		msnows[i].spawn = false;
-	// 	};
-	// };
+	for (var i = 0; i < msnows.length; i++) {
+		msnows[i].update().draw();
+		if (msnows[i].spawn) {
+			spawn3 = true;
+			msnows[i].spawn = false;
+		};
+	};
 
-	// drawCharacter();
+	drawCharacter();
 	
-	// for (var i = 0; i < nsnows.length; i++) {
-	// 	nsnows[i].update().draw();
-	// 	if (nsnows[i].spawn) {
-	// 		spawn1 = true;
-	// 		nsnows[i].spawn = false;
-	// 	};
-	// };
+	for (var i = 0; i < nsnows.length; i++) {
+		nsnows[i].update().draw();
+		if (nsnows[i].spawn) {
+			spawn1 = true;
+			nsnows[i].spawn = false;
+		};
+	};
 
 	if (spawn1 && nsnows.length < 100) {
 		nsnows.push(new nearSnow());
