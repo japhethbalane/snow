@@ -9,12 +9,17 @@ var fsnows = [];
 var msnows = [];
 var character;
 
+///////////////////////////////////////////////////////////////////////////////////////
+
 generateNearSnow(1);
+
 generateMidSnow(15);
+
 generateFarSnow(20);
+
 generateCharacter();
 
-setInterval(drawWorld, 20);
+////////////////////////////////////////////////////////////////////////////////////////
 
 function generateMidSnow(snowCount) {
 	for (var i = 0; i < snowCount; i++) {
@@ -38,8 +43,12 @@ function generateCharacter(){
 	character = new Character();
 }
 
-function drawWorld() {
+/////////////////////////////////////////////////////////////////////////////////////////
+
+function World() {
 	clearCanvas();
+	drawArea();
+
 	var spawn1, spawn2, spawn3;
 	spawn1 = spawn2 = spawn3 = false;
 
@@ -51,31 +60,23 @@ function drawWorld() {
 		};
 	};
 	
-	drawArea();
-	
-	for (var i = 0; i < msnows.length; i++) {
-		msnows[i].update().draw();
-		if (msnows[i].spawn) {
-			spawn3 = true;
-			msnows[i].spawn = false;
-		};
-	};
+	// for (var i = 0; i < msnows.length; i++) {
+	// 	msnows[i].update().draw();
+	// 	if (msnows[i].spawn) {
+	// 		spawn3 = true;
+	// 		msnows[i].spawn = false;
+	// 	};
+	// };
 
-	character.drawBackground();
-	character.drawHood();
-	character.drawBody();
-	character.drawLeftCoat();
-	character.drawRightCoat();
-	character.drawCollar();
-	character.drawLines();
+	// drawCharacter();
 	
-	for (var i = 0; i < nsnows.length; i++) {
-		nsnows[i].update().draw();
-		if (nsnows[i].spawn) {
-			spawn1 = true;
-			nsnows[i].spawn = false;
-		};
-	};
+	// for (var i = 0; i < nsnows.length; i++) {
+	// 	nsnows[i].update().draw();
+	// 	if (nsnows[i].spawn) {
+	// 		spawn1 = true;
+	// 		nsnows[i].spawn = false;
+	// 	};
+	// };
 
 	if (spawn1 && nsnows.length < 100) {
 		nsnows.push(new nearSnow());
@@ -86,6 +87,16 @@ function drawWorld() {
 	if (spawn3 && msnows.length < 800) {
 		msnows.push(new midSnow());
 	};
+}
+
+function drawCharacter() {
+	character.drawBackground();
+	character.drawHood();
+	character.drawBody();
+	character.drawLeftCoat();
+	character.drawRightCoat();
+	character.drawCollar();
+	character.drawLines();
 }
 
 function drawArea() {
@@ -152,30 +163,33 @@ function randomBetween(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
 function nearSnow() {
 	this.x = randomBetween(0, canvas.width);
 	this.y = randomBetween(0, canvas.height);
 	this.radius = randomBetween(2,4);
 	this.spawn = false;
-	this.snowCatch = randomBetween(1,25);
-	this.stop = false;
+
+	this.catched = false;
 	this.melt = 0;
+	this.catch = randomBetween(1,25);
 
 	this.update = function() {
 		this.y++;
 		this.x -= 5;
 
-		if (this.snowCatch == 1) {
+		if (this.catch == 1) {
 			if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && 
 				this.y <= canvas.height-250 && this.y >= canvas.height/4+16) {
-				this.stop = true;
+				this.catched = true;
 			};
 			if (this.x <= canvas.width/2+20 && this.x >= canvas.width/2-30 && 
 				this.y <= canvas.height/2-90 && this.y >= canvas.height/2-140) {
-				this.stop = false;
+				this.catched = false;
 			};
 		};
-		if (this.stop) {
+		if (this.catched) {
 			this.y--;
 			this.x+=5;
 			this.melt++;
@@ -188,7 +202,7 @@ function nearSnow() {
 		};
 
 		if (this.y >= canvas.height) {
-			this.stop = false;
+			this.catched = false;
 			this.y = 0;
 			this.radius = randomBetween(1,4);
 			this.spawn = true;
@@ -201,7 +215,7 @@ function nearSnow() {
 			this.x = canvas.width;
 			this.radius = randomBetween(2,4);
 		};
-		this.snowCatch = randomBetween(1,25);
+		this.catch = randomBetween(1,25);
 
 		return this;
 	}
@@ -211,6 +225,59 @@ function nearSnow() {
 	    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
 	    context.fillStyle = "rgba(255, 255, 255, 1)";
 	    context.strokeStyle = "#eedcdc";
+	    context.fill();
+	    context.stroke();
+
+	    return this;
+	}
+}
+
+function midSnow() {
+	this.x = randomBetween(0, canvas.width);
+	this.y = randomBetween(0, canvas.height);
+	this.radius = randomBetween(1,3);
+	this.spawn = false;
+
+	this.catched = randomBetween(canvas.height-175,canvas.height-25);
+	this.melt = 0;
+
+	this.update = function() {
+		this.y += 0.7;
+		this.x -= 3;
+
+		if (this.y > this.catched) {
+			if (this.melt < 100) {
+				this.melt++;
+				this.y -= 0.7;
+				this.x += 3;
+			};
+			if (this.melt >= 100) {
+				this.radius-=0.1;
+				this.y -= 0.7;
+				this.x += 3;
+			};
+			if (this.radius <= 0) {
+				this.melt = 0;
+				this.spawn = true;
+				this.x = randomBetween(0, canvas.width);
+				this.y = randomBetween(0, canvas.height-500);
+				this.radius = randomBetween(1,3);
+			};
+		};
+
+		if (this.x < 0) {
+			this.x = canvas.width;
+			this.radius = randomBetween(1,3);
+		};
+
+		return this;
+	}
+
+	this.draw = function() {
+		context.beginPath();
+	    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
+	    context.fillStyle = "rgba(255, 255, 255, 1)";
+	    context.strokeStyle = "#eeddcc";
 	    context.fill();
 	    context.stroke();
 
@@ -247,58 +314,6 @@ function farSnow() {
 	    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
 	    context.fillStyle = "rgba(255, 255, 255, 1)";
 	    context.strokeStyle = "#cceedd";
-	    context.fill();
-	    context.stroke();
-
-	    return this;
-	}
-}
-
-function midSnow() {
-	this.x = randomBetween(0, canvas.width);
-	this.y = randomBetween(0, canvas.height);
-	this.radius = randomBetween(1,3);
-	this.spawn = false;
-	this.stop = randomBetween(canvas.height-175,canvas.height-25);
-	this.melt = 0;
-
-	this.update = function() {
-		this.y += 0.7;
-		this.x -= 3;
-
-		if (this.y > this.stop) {
-			if (this.melt < 100) {
-				this.melt++;
-				this.y -= 0.7;
-				this.x += 3;
-			};
-			if (this.melt >= 100) {
-				this.radius-=0.1;
-				this.y -= 0.7;
-				this.x += 3;
-			};
-			if (this.radius <= 0) {
-				this.melt = 0;
-				this.spawn = true;
-				this.x = randomBetween(0, canvas.width);
-				this.y = randomBetween(0, canvas.height-500);
-				this.radius = randomBetween(1,3);
-			};
-		};
-
-		if (this.x < 0) {
-			this.x = canvas.width;
-			this.radius = randomBetween(1,3);
-		};
-
-		return this;
-	}
-
-	this.draw = function() {
-		context.beginPath();
-	    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-	    context.fillStyle = "rgba(255, 255, 255, 1)";
-	    context.strokeStyle = "#eeddcc";
 	    context.fill();
 	    context.stroke();
 
@@ -676,3 +691,7 @@ function Character() {
 		context.stroke();
 	}
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+setInterval(World, 20);
