@@ -9,15 +9,24 @@ var fsnows = [];
 var msnows = [];
 var character;
 
+var windSpeed = 0;
+var x;
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
-generateNearSnow(1);
+generateNearSnow(4);
 
 generateMidSnow(15);
 
 generateFarSnow(20);
 
 generateCharacter();
+
+var trackMouse = function(event) {
+    x = event.pageX;
+    // console.log(event.pageY);
+}
+canvas.addEventListener("mousemove", trackMouse);
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,6 +57,7 @@ function generateCharacter(){
 function World() {
 	clearCanvas();
 	drawArea();
+	updateWind();
 
 	var spawn1, spawn2, spawn3;
 	spawn1 = spawn2 = spawn3 = false;
@@ -163,6 +173,25 @@ function randomBetween(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function updateWind() {
+	var test = canvas.width / 7;
+	if (x < test) {
+		windSpeed = -5;
+	} else if (x < test * 2) {
+		windSpeed = -3;
+	} else if (x < test * 3) {
+		windSpeed = -2;
+	} else if (x < test * 4) {
+		windSpeed = 0;
+	} else if (x < test * 5) {
+		windSpeed = 2;
+	} else if (x < test * 6) {
+		windSpeed = 3;
+	} else if (x < test * 7) {
+		windSpeed = 5;
+	};
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function nearSnow() {
@@ -177,7 +206,7 @@ function nearSnow() {
 
 	this.update = function() {
 		this.y++;
-		this.x -= 5;
+		this.x += windSpeed;
 
 		if (this.catch == 1) {
 			if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && 
@@ -191,7 +220,7 @@ function nearSnow() {
 		};
 		if (this.catched) {
 			this.y--;
-			this.x+=5;
+			this.x-=windSpeed;
 			this.melt++;
 			if (this.melt >= 100) {
 				this.radius -= 0.1;
@@ -243,7 +272,7 @@ function midSnow() {
 
 	this.update = function() {
 		this.y += 0.7;
-		this.x -= 3;
+		this.x += (windSpeed * 3) / 5;
 
 		if (this.y > this.catched) {
 			if (this.melt < 100) {
@@ -254,7 +283,7 @@ function midSnow() {
 			if (this.melt >= 100) {
 				this.radius-=0.1;
 				this.y -= 0.7;
-				this.x += 3;
+				this.x -= (windSpeed * 3) / 5;
 			};
 			if (this.radius <= 0) {
 				this.melt = 0;
@@ -293,7 +322,7 @@ function farSnow() {
 
 	this.update = function() {
 		this.y += 0.4;
-		this.x -= 2;
+		this.x += (windSpeed * 2) / 5;
 
 		if (this.y > canvas.height - 200) {
 			this.y = 0;
