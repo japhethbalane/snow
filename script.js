@@ -10,7 +10,7 @@ var msnows = [];
 var character;
 
 var windSpeed = 0;
-var x;
+var mouseX = canvas.width / 2;
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,7 +23,7 @@ generateFarSnow(20);
 generateCharacter();
 
 var trackMouse = function(event) {
-    x = event.pageX;
+    mouseX = event.pageX;
     // console.log(event.pageY);
 }
 canvas.addEventListener("mousemove", trackMouse);
@@ -55,6 +55,7 @@ function generateCharacter(){
 /////////////////////////////////////////////////////////////////////////////////////////
 
 function World() {
+	console.log(msnows.length);
 	clearCanvas();
 	drawArea();
 	updateWind();
@@ -164,9 +165,7 @@ function drawArea() {
 }
 
 function clearCanvas() {
-	context.fillStyle = "#aabaa9";
-	// context.fillStyle = "rgba(185,200,185,0.5)";
-	context.fillRect(0, 0, canvas.width, canvas.height);
+	context.fillStyle = "#aabaa9";	context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function randomBetween(min, max) {
@@ -174,22 +173,7 @@ function randomBetween(min, max) {
 }
 
 function updateWind() {
-	var test = canvas.width / 7;
-	if (x < test) {
-		windSpeed = -5;
-	} else if (x < test * 2) {
-		windSpeed = -3;
-	} else if (x < test * 3) {
-		windSpeed = -2;
-	} else if (x < test * 4) {
-		windSpeed = 0;
-	} else if (x < test * 5) {
-		windSpeed = 2;
-	} else if (x < test * 6) {
-		windSpeed = 3;
-	} else if (x < test * 7) {
-		windSpeed = 5;
-	};
+	windSpeed = (((canvas.width/2) - mouseX) * (-1)) / 50;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -202,11 +186,17 @@ function nearSnow() {
 
 	this.catched = false;
 	this.melt = 0;
-	this.catch = randomBetween(1,25);
+	this.catch;
+
+	this.move = function() {
+		this.y += 1;
+		this.x += windSpeed;
+	}
 
 	this.update = function() {
-		this.y++;
-		this.x += windSpeed;
+
+		this.catch = randomBetween(1,25);
+		this.move();
 
 		if (this.catch == 1) {
 			if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && 
@@ -223,7 +213,7 @@ function nearSnow() {
 			this.x-=windSpeed;
 			this.melt++;
 			if (this.melt >= 100) {
-				this.radius -= 0.1;
+				this.radius -= 0.05;
 			};
 			if (this.radius <= 0) {
 				this.y = canvas.height;
@@ -232,8 +222,7 @@ function nearSnow() {
 
 		if (this.y >= canvas.height) {
 			this.catched = false;
-			this.y = 0;
-			this.radius = randomBetween(1,4);
+			this.radius = randomBetween(2,4);
 			this.spawn = true;
 			this.melt = 0;
 			this.x = randomBetween(0, canvas.width);
@@ -244,7 +233,11 @@ function nearSnow() {
 			this.x = canvas.width;
 			this.radius = randomBetween(2,4);
 		};
-		this.catch = randomBetween(1,25);
+
+		if (this.x > canvas.width) {
+			this.x = 0;
+			this.radius = randomBetween(2,4);
+		};
 
 		return this;
 	}
@@ -253,9 +246,7 @@ function nearSnow() {
 		context.beginPath();
 	    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
 	    context.fillStyle = "rgba(255, 255, 255, 1)";
-	    context.strokeStyle = "#eedcdc";
 	    context.fill();
-	    context.stroke();
 
 	    return this;
 	}
@@ -264,39 +255,57 @@ function nearSnow() {
 function midSnow() {
 	this.x = randomBetween(0, canvas.width);
 	this.y = randomBetween(0, canvas.height);
-	this.radius = randomBetween(1,3);
+	this.radius = randomBetween(2,4);
 	this.spawn = false;
 
-	this.catched = randomBetween(canvas.height-175,canvas.height-25);
+	this.catched = false;
 	this.melt = 0;
 
-	this.update = function() {
+	this.move = function() {
 		this.y += 0.7;
-		this.x += (windSpeed * 3) / 5;
+		this.x += (windSpeed * 3) / 7;
+	}
 
-		if (this.y > this.catched) {
-			if (this.melt < 100) {
-				this.melt++;
-				this.y -= 0.7;
-				this.x += 3;
+	this.update = function() {
+		if (!this.catched) {
+			this.move();
+			if (this.y > canvas.height - 200 && randomBetween(0, 100) == 1) {
+				this.catched = true;
 			};
-			if (this.melt >= 100) {
+
+			if (this.x < 0) {
+				this.x = canvas.width;
+				this.radius = randomBetween(2,4);
+			};
+
+			if (this.x > canvas.width) {
+				this.x = 0;
+				this.radius = randomBetween(2,4);
+			};
+
+			if (this.y > canvas.height) {
+				this.spawn = true;
+				this.x = randomBetween(0, canvas.width);
+				this.y = randomBetween(0, canvas.height-500);
+				this.radius = randomBetween(2,4);
+			};
+		};
+
+		if (this.catched) {
+			if (this.melt < 1000) {
+				this.melt++;
+			};
+			if (this.melt >= 1000) {
 				this.radius-=0.1;
-				this.y -= 0.7;
-				this.x -= (windSpeed * 3) / 5;
 			};
 			if (this.radius <= 0) {
+				this.catched = false;
 				this.melt = 0;
 				this.spawn = true;
 				this.x = randomBetween(0, canvas.width);
 				this.y = randomBetween(0, canvas.height-500);
-				this.radius = randomBetween(1,3);
+				this.radius = randomBetween(1,4);
 			};
-		};
-
-		if (this.x < 0) {
-			this.x = canvas.width;
-			this.radius = randomBetween(1,3);
 		};
 
 		return this;
@@ -306,9 +315,7 @@ function midSnow() {
 		context.beginPath();
 	    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
 	    context.fillStyle = "rgba(255, 255, 255, 1)";
-	    context.strokeStyle = "#eeddcc";
 	    context.fill();
-	    context.stroke();
 
 	    return this;
 	}
@@ -320,9 +327,13 @@ function farSnow() {
 	this.radius = randomBetween(1,2);
 	this.spawn = false;
 
-	this.update = function() {
+	this.move = function() {
 		this.y += 0.4;
-		this.x += (windSpeed * 2) / 5;
+		this.x += windSpeed / 5;
+	}
+
+	this.update = function() {
+		this.move();
 
 		if (this.y > canvas.height - 200) {
 			this.y = 0;
@@ -335,6 +346,11 @@ function farSnow() {
 			this.radius = randomBetween(1,2);
 		};
 
+		if (this.x > canvas.width) {
+			this.x = 0;
+			this.radius = randomBetween(1,2);
+		};
+
 		return this;
 	}
 
@@ -342,9 +358,7 @@ function farSnow() {
 		context.beginPath();
 	    context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
 	    context.fillStyle = "rgba(255, 255, 255, 1)";
-	    context.strokeStyle = "#cceedd";
 	    context.fill();
-	    context.stroke();
 
 	    return this;
 	}
@@ -423,11 +437,7 @@ function Character() {
 		context.moveTo(this.x-5, this.y+145);
 		context.lineTo(this.x-23, this.y+330);
 		context.lineTo(this.x-40, this.y+330);
-		context.lineTo(this.x-105, this.y+300);
-		context.lineTo(this.x-150, this.y+270);
-		context.lineTo(this.x-165, this.y+245);
-		context.lineTo(this.x-140, this.y+240);
-		context.lineTo(this.x-85, this.y+210);
+		context.lineTo(this.x-65, this.y+210);
 		context.lineTo(this.x-45, this.y+130);
 		context.lineTo(this.x-37, this.y+125);
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
@@ -589,110 +599,6 @@ function Character() {
 		}
 
 		{
-			context.moveTo(this.x-5, this.y+145);
-			context.lineTo(this.x-20, this.y+160);
-			context.lineTo(this.x-35, this.y+145);
-			context.lineTo(this.x-54, this.y+147);
-			context.moveTo(this.x-35, this.y+145);
-			context.lineTo(this.x-30, this.y+128);
-			context.moveTo(this.x-35, this.y+145);
-			context.lineTo(this.x-45, this.y+155);
-			context.lineTo(this.x-57, this.y+154);
-			context.moveTo(this.x-20, this.y+160);
-			context.lineTo(this.x-40, this.y+185);
-			context.lineTo(this.x-45, this.y+155);
-			context.moveTo(this.x-5, this.y+145);
-			context.lineTo(this.x-32, this.y+138);
-			context.moveTo(this.x-85, this.y+210);
-			context.lineTo(this.x-50, this.y+225);
-			context.lineTo(this.x-40, this.y+240);
-			context.lineTo(this.x-13, this.y+230);
-			context.moveTo(this.x-85, this.y+210);
-			context.lineTo(this.x-77, this.y+240);
-			context.lineTo(this.x-60, this.y+260);
-			context.lineTo(this.x-35, this.y+270);
-			context.lineTo(this.x-21, this.y+310);
-			context.moveTo(this.x-140, this.y+240);
-			context.lineTo(this.x-110, this.y+250);
-			context.lineTo(this.x-90, this.y+270);
-			context.lineTo(this.x-80, this.y+269);
-			context.lineTo(this.x-60, this.y+300);
-			context.lineTo(this.x-22, this.y+323);
-			context.moveTo(this.x-140, this.y+240);
-			context.lineTo(this.x-110, this.y+235);
-			context.lineTo(this.x-85, this.y+210);
-			context.moveTo(this.x-77, this.y+240);
-			context.lineTo(this.x-110, this.y+235);
-			context.lineTo(this.x-110, this.y+250);
-			context.lineTo(this.x-90, this.y+252);
-			context.lineTo(this.x-77, this.y+240);
-			context.moveTo(this.x-91, this.y+270);
-			context.lineTo(this.x-90, this.y+252);
-			context.lineTo(this.x-80, this.y+269);
-			context.moveTo(this.x-60, this.y+260);
-			context.lineTo(this.x-55, this.y+275);
-			context.lineTo(this.x-72, this.y+260);
-			context.lineTo(this.x-77, this.y+240);
-			context.moveTo(this.x-72, this.y+260);
-			context.lineTo(this.x-75, this.y+278);
-			context.moveTo(this.x-35, this.y+270);
-			context.lineTo(this.x-55, this.y+275);
-			context.lineTo(this.x-68, this.y+286);
-			context.moveTo(this.x-35, this.y+270);
-			context.lineTo(this.x-45, this.y+298);
-			context.lineTo(this.x-60, this.y+300);
-			context.moveTo(this.x-55, this.y+275);
-			context.lineTo(this.x-45, this.y+298);
-			context.moveTo(this.x-42, this.y+288);
-			context.lineTo(this.x-35, this.y+299);
-			context.lineTo(this.x-30, this.y+285);
-			context.moveTo(this.x-35, this.y+299);
-			context.lineTo(this.x-33, this.y+315);
-			context.moveTo(this.x-80, this.y+230);
-			context.lineTo(this.x-50, this.y+225);
-			context.lineTo(this.x-67, this.y+253);
-			context.moveTo(this.x-57, this.y+238);
-			context.lineTo(this.x-40, this.y+240);
-			context.lineTo(this.x-50, this.y+264);
-			context.moveTo(this.x-13, this.y+230);
-			context.lineTo(this.x-50, this.y+264);
-			context.moveTo(this.x-35, this.y+270);
-			context.lineTo(this.x-25, this.y+260);
-			context.lineTo(this.x-13, this.y+230);
-			context.moveTo(this.x-25, this.y+260);
-			context.lineTo(this.x-20, this.y+288);
-			context.moveTo(this.x-140, this.y+240);
-			context.lineTo(this.x-135, this.y+260);
-			context.lineTo(this.x-150, this.y+270);
-			context.moveTo(this.x-135, this.y+260);
-			context.lineTo(this.x-110, this.y+250);
-			context.moveTo(this.x-125, this.y+255);
-			context.lineTo(this.x-100, this.y+280);
-			context.lineTo(this.x-125, this.y+285);
-			context.lineTo(this.x-135, this.y+260);
-			context.moveTo(this.x-165, this.y+245);
-			context.lineTo(this.x-150, this.y+250);
-			context.lineTo(this.x-140, this.y+240);
-			context.moveTo(this.x-150, this.y+250);
-			context.lineTo(this.x-142, this.y+264);
-			context.moveTo(this.x-55, this.y+322);
-			context.lineTo(this.x-60, this.y+300);
-			context.lineTo(this.x-105, this.y+300);
-			context.lineTo(this.x-112, this.y+283);
-			context.moveTo(this.x-112, this.y+283);
-			context.lineTo(this.x-85, this.y+293);
-			context.lineTo(this.x-90, this.y+270);
-			context.moveTo(this.x-68, this.y+286);
-			context.lineTo(this.x-85, this.y+293);
-			context.lineTo(this.x-89, this.y+300);
-			context.lineTo(this.x-80, this.y+312);
-			context.moveTo(this.x-90, this.y+270);
-			context.lineTo(this.x-115, this.y+265);
-			context.moveTo(this.x-85, this.y+210);
-			context.lineTo(this.x-60, this.y+200);
-			context.lineTo(this.x-75, this.y+190);
-			context.lineTo(this.x-55, this.y+180);
-			context.lineTo(this.x-44, this.y+165);
 			context.moveTo(this.x-60, this.y+200);
 			context.lineTo(this.x-55, this.y+180);
 			context.lineTo(this.x-40, this.y+185);
