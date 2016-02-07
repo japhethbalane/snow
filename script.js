@@ -101,9 +101,8 @@ function World() {
 }
 
 function drawCharacter() {
-	character.drawBackground();
-	character.drawHood();
 	character.drawBody();
+	character.drawHood();
 	character.drawLeftCoat();
 	character.drawRightCoat();
 	character.drawCollar();
@@ -196,11 +195,11 @@ function nearSnow() {
 	this.update = function() {
 
 		this.catch = randomBetween(1,25);
-		this.move();
+		this.move();/////////////edit
 
 		if (this.catch == 1) {
-			if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && 
-				this.y <= canvas.height-250 && this.y >= canvas.height/4+16) {
+			if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && //////edit catch area
+				this.y <= canvas.height-250 && this.y >= canvas.height/4+16) {/// kay bati
 				this.catched = true;
 			};
 			if (this.x <= canvas.width/2+20 && this.x >= canvas.width/2-30 && 
@@ -368,32 +367,6 @@ function Character() {
 	this.x = canvas.width / 2;
 	this.y = canvas.height / 4;
 
-	this.drawBackground =function() {
-		context.beginPath();
-		context.moveTo(this.x, this.y);
-		context.lineTo(this.x-29, this.y+16);
-		context.lineTo(this.x-44, this.y+36);
-		context.lineTo(this.x-55, this.y+70);
-		context.lineTo(this.x-45, this.y+90);
-		context.lineTo(this.x-5, this.y+110);
-		context.lineTo(this.x+38, this.y+93);
-		context.lineTo(this.x+47, this.y+70);
-		context.lineTo(this.x+40, this.y+35);
-		context.moveTo(this.x-5, this.y+160);
-		context.lineTo(this.x-30, this.y+165);
-		context.lineTo(this.x-75, this.y+140);
-		context.lineTo(this.x-45, this.y+100);
-		context.lineTo(this.x-5, this.y+110);
-		context.lineTo(this.x+38, this.y+98);
-		context.lineTo(this.x+55, this.y+140);
-		context.lineTo(this.x+20, this.y+160);
-
-	    context.fillStyle = "rgba(120, 120, 120, 1)";
-	    context.strokeStyle = "#999999";
-	    context.fill();
-		context.closePath();
-		context.stroke();
-	}
 	this.drawHood = function() {
 		context.beginPath();
 		context.moveTo(this.x, this.y);
@@ -420,6 +393,25 @@ function Character() {
 	}
 	this.drawBody = function() {
 		context.beginPath();
+
+		context.moveTo(this.x, this.y);
+		context.lineTo(this.x-29, this.y+16);
+		context.lineTo(this.x-44, this.y+36);
+		context.lineTo(this.x-55, this.y+70);
+		context.lineTo(this.x-45, this.y+90);
+		context.lineTo(this.x-5, this.y+110);
+		context.lineTo(this.x+38, this.y+93);
+		context.lineTo(this.x+47, this.y+70);
+		context.lineTo(this.x+40, this.y+35);
+		context.moveTo(this.x-5, this.y+160);
+		context.lineTo(this.x-30, this.y+165);
+		context.lineTo(this.x-75, this.y+140);
+		context.lineTo(this.x-45, this.y+100);
+		context.lineTo(this.x-5, this.y+110);
+		context.lineTo(this.x+38, this.y+98);
+		context.lineTo(this.x+55, this.y+140);
+		context.lineTo(this.x+20, this.y+160);
+
 		context.moveTo(this.x-5, this.y+150);
 		context.lineTo(this.x-30, this.y+280);
 		context.lineTo(this.x-10, this.y+420);
@@ -435,9 +427,10 @@ function Character() {
 	this.drawLeftCoat = function() {
 		context.beginPath();
 		context.moveTo(this.x-5, this.y+145);
-		context.lineTo(this.x-23, this.y+330);
-		context.lineTo(this.x-40, this.y+330);
-		context.lineTo(this.x-65, this.y+210);
+		context.lineTo(this.x-23, this.y+260);
+		context.lineTo(this.x-10, this.y+345);
+		context.lineTo(this.x-50, this.y+320);
+		context.lineTo(this.x-60, this.y+210);
 		context.lineTo(this.x-45, this.y+130);
 		context.lineTo(this.x-37, this.y+125);
 	    context.fillStyle = "rgba(200, 200, 200, 1)";
@@ -599,25 +592,38 @@ function Character() {
 		}
 
 		{
-			context.moveTo(this.x-60, this.y+200);
-			context.lineTo(this.x-55, this.y+180);
-			context.lineTo(this.x-40, this.y+185);
-			context.lineTo(this.x-30, this.y+200);
-			context.lineTo(this.x-20, this.y+180);
-			context.lineTo(this.x-29, this.y+170);
-			context.moveTo(this.x-6, this.y+160);
-			context.lineTo(this.x-20, this.y+180);
-			context.lineTo(this.x-14, this.y+230);
-			context.moveTo(this.x-60, this.y+200);
-			context.lineTo(this.x-50, this.y+225);
-			context.lineTo(this.x-47, this.y+200);
-			context.lineTo(this.x-55, this.y+180);
-			context.moveTo(this.x-47, this.y+200);
-			context.lineTo(this.x-30, this.y+201);
-			context.lineTo(this.x-32, this.y+215);
-			context.lineTo(this.x-47, this.y+230);
-			context.moveTo(this.x-32, this.y+215);
-			context.lineTo(this.x-22, this.y+234);
+			context.moveTo(this.x-60, this.y+210);
+			context.lineTo(this.x-23, this.y+260);
+			context.lineTo(this.x-33, this.y+200);
+			context.lineTo(this.x-31, this.y+180);
+			context.lineTo(this.x-60, this.y+210);
+
+			context.moveTo(this.x-5, this.y+145);
+			context.lineTo(this.x-25, this.y+150);
+			context.lineTo(this.x-45, this.y+130);
+			context.lineTo(this.x-5, this.y+145);
+			context.lineTo(this.x-25, this.y+165);
+			context.lineTo(this.x-25, this.y+150);
+			context.lineTo(this.x-45, this.y+165);
+			context.lineTo(this.x-50, this.y+155);
+
+			context.moveTo(this.x-45, this.y+165);
+			context.lineTo(this.x-60, this.y+210);
+
+			context.moveTo(this.x-31, this.y+180);
+			context.lineTo(this.x-45, this.y+165);
+			context.lineTo(this.x-25, this.y+166);
+			context.lineTo(this.x-10, this.y+175);
+			context.lineTo(this.x-31, this.y+180);
+			context.lineTo(this.x-15, this.y+205);
+			context.lineTo(this.x-33, this.y+200);
+			context.lineTo(this.x-40, this.y+220);
+			context.lineTo(this.x-23, this.y+260);
+			context.lineTo(this.x-55, this.y+265);//
+			context.lineTo(this.x-39, this.y+240);
+
+			context.moveTo(this.x-40, this.y+220);
+			context.lineTo(this.x-60, this.y+210);
 		}
 
 	    context.fillStyle = "rgba(190, 200, 200, 1)";
