@@ -210,55 +210,59 @@ function nearSnow() {
 		this.x += windSpeed;
 	}
 
+	this.respawn = function() {
+		this.catched = false;
+		this.radius = randomBetween(2,4);
+		this.spawn = true;
+		this.melt = 0;
+		this.x = randomBetween(0, canvas.width);
+		this.y = randomBetween(0, canvas.height-500);
+	}
+
 	this.update = function() {
 
-		this.move();/////////////edit
+		if (!this.catched) {
+			this.move();/////////////edit
 
-		if (randomBetween(1,25) == 1) {
-			if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && //////edit catch area
-				this.y <= canvas.height-250 && this.y >= canvas.height/4+16) {/// kay bati
-				this.catched = true;
+			if (randomBetween(1,25) == 1) {
+				if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && //////edit catch area
+					this.y <= canvas.height-250 && this.y >= canvas.height/4+16) {/// kay bati
+					this.catched = true;
+				};
+				if (this.x <= canvas.width/2+20 && this.x >= canvas.width/2-30 && 
+					this.y <= canvas.height/2-90 && this.y >= canvas.height/2-140) {
+					this.catched = false;
+				};
+				// context.fillStyle = "rgba(255,255,255,0.5)";
+				// context.fillRect(canvas.width/2-52, canvas.height/3+45, 85, 215);
+				// context.beginPath();
+				// context.arc(canvas.width/2-3, canvas.height/3, 48, Math.PI*2, false);
+				// context.fill(); // catch area // legit :)
 			};
-			if (this.x <= canvas.width/2+20 && this.x >= canvas.width/2-30 && 
-				this.y <= canvas.height/2-90 && this.y >= canvas.height/2-140) {
-				this.catched = false;
+
+			if (this.y >= canvas.height) {
+				this.respawn();
 			};
-			// context.fillStyle = "rgba(255,255,255,0.5)";
-			// context.fillRect(canvas.width/2-52, canvas.height/3+45, 85, 215);
-			// context.beginPath();
-			// context.arc(canvas.width/2-3, canvas.height/3, 48, Math.PI*2, false);
-			// context.fill();
+
+			if (this.x < 0) {
+				this.x = canvas.width;
+				this.radius = randomBetween(2,4);
+			};
+
+			if (this.x > canvas.width) {
+				this.x = 0;
+				this.radius = randomBetween(2,4);
+			};
 		};
 
 		if (this.catched) {
-			this.y--;
-			this.x-=windSpeed;
 			this.melt++;
 			if (this.melt >= 500) {
 				this.radius -= 0.05;
 			};
 			if (this.radius <= 0) {
-				this.y = canvas.height;
+				this.respawn();
 			};
-		};
-
-		if (this.y >= canvas.height) {
-			this.catched = false;
-			this.radius = randomBetween(2,4);
-			this.spawn = true;
-			this.melt = 0;
-			this.x = randomBetween(0, canvas.width);
-			this.y = randomBetween(0, canvas.height-500);
-		};
-
-		if (this.x < 0) {
-			this.x = canvas.width;
-			this.radius = randomBetween(2,4);
-		};
-
-		if (this.x > canvas.width) {
-			this.x = 0;
-			this.radius = randomBetween(2,4);
 		};
 
 		return this;
