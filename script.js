@@ -1,4 +1,4 @@
-var canvas = document.getElementById("Snow");
+var canvas = document.getElementById("snow");
 var context = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
@@ -91,10 +91,10 @@ function World() {
 
 	spawnSnow();
 
-	// console.log(nsnows.length);
-	// console.log(msnows.length);
-	// console.log(fsnows.length);
-	// console.log(" ");
+	console.log(nsnows.length);
+	console.log(msnows.length);
+	console.log(fsnows.length);
+	console.log(" ");
 }
 
 function spawnSnow() {
@@ -107,15 +107,6 @@ function spawnSnow() {
 	for (var i = 0; i < spawn3 && fsnows.length < 900; i++) {
 		fsnows.push(new farSnow());
 	};
-	// if (spawn1 && nsnows.length < 100) {
-	// 	nsnows.push(new nearSnow());
-	// };
-	// if (spawn2 && msnows.length < 800) {
-	// 	msnows.push(new midSnow());
-	// };
-	// if (spawn3 && fsnows.length < 900) {
-	// 	fsnows.push(new farSnow());
-	// };
 }
 
 function drawCharacter() {
@@ -201,7 +192,6 @@ function nearSnow() {
 	this.y = randomBetween(0, canvas.height);
 	this.radius = randomBetween(2,4);
 	this.spawn = false;
-
 	this.catched = false;
 	this.melt = 0;
 
@@ -222,22 +212,28 @@ function nearSnow() {
 	this.update = function() {
 
 		if (!this.catched) {
-			this.move();/////////////edit
+			this.move();
 
 			if (randomBetween(1,25) == 1) {
-				if (this.x <= canvas.width/2+36 && this.x >= canvas.width/2-36 && //////edit catch area
-					this.y <= canvas.height-250 && this.y >= canvas.height/4+16) {/// kay bati
+				if (this.x >= canvas.width/2-52 && this.x <= canvas.width/2-52+85 &&
+					this.y >= canvas.height/3+45 && this.y <= canvas.height/3+45+215) {
 					this.catched = true;
 				};
-				if (this.x <= canvas.width/2+20 && this.x >= canvas.width/2-30 && 
-					this.y <= canvas.height/2-90 && this.y >= canvas.height/2-140) {
+
+				if (Math.sqrt(
+					Math.abs(this.x-canvas.width/2-3)*Math.abs(this.x-canvas.width/2-3) + 
+					Math.abs(this.y-canvas.height/3)*Math.abs(this.y-canvas.height/3)
+					) < 48) {
+					this.catched = true;
+				};
+
+				if (Math.sqrt(
+					Math.abs(this.x-canvas.width/2+7)*Math.abs(this.x-canvas.width/2+7) + 
+					Math.abs(this.y-canvas.height/3-15)*Math.abs(this.y-canvas.height/3-15)
+					) < 30) {
 					this.catched = false;
 				};
-				// context.fillStyle = "rgba(255,255,255,0.5)";
-				// context.fillRect(canvas.width/2-52, canvas.height/3+45, 85, 215);
-				// context.beginPath();
-				// context.arc(canvas.width/2-3, canvas.height/3, 48, Math.PI*2, false);
-				// context.fill(); // catch area // legit :)
+
 			};
 
 			if (this.y >= canvas.height) {
@@ -292,6 +288,15 @@ function midSnow() {
 		this.x += (windSpeed * 3) / 7;
 	}
 
+	this.respawn = function(){
+		this.catched = false;
+		this.melt = 0;
+		this.spawn = true;
+		this.x = randomBetween(0, canvas.width);
+		this.y = randomBetween(0, canvas.height-500);
+		this.radius = randomBetween(2,4);
+	}
+
 	this.update = function() {
 		if (!this.catched) {
 			this.move();
@@ -310,27 +315,19 @@ function midSnow() {
 			};
 
 			if (this.y > canvas.height) {
-				this.spawn = true;
-				this.x = randomBetween(0, canvas.width);
-				this.y = randomBetween(0, canvas.height-500);
-				this.radius = randomBetween(2,4);
+				this.respawn();
 			};
 		};
 
 		if (this.catched) {
-			if (this.melt < 1000) {
+			if (this.melt < 600) {
 				this.melt++;
 			};
-			if (this.melt >= 1000) {
+			if (this.melt >= 600) {
 				this.radius-=0.1;
 			};
 			if (this.radius <= 0) {
-				this.catched = false;
-				this.melt = 0;
-				this.spawn = true;
-				this.x = randomBetween(0, canvas.width);
-				this.y = randomBetween(0, canvas.height-500);
-				this.radius = randomBetween(2,4);
+				this.respawn();
 			};
 		};
 

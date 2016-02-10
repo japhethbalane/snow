@@ -15,9 +15,14 @@ canvas {
 audio {
 	position: absolute;
 	top: 90%;
-	left: 38%;
+	left: 39%;
+	opacity: 0.1;
+
+	transition-property: opacity, margin-left;
+    transition-duration: 1s;
+    transition-timing-function: ease;
 }
 
-.playing {
-	
+audio:hover {
+	opacity: 1.0;
 }
