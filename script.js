@@ -277,7 +277,7 @@ function nearSnow() {
 function midSnow() {
 	this.x = randomBetween(0, canvas.width);
 	this.y = randomBetween(0, canvas.height);
-	this.radius = randomBetween(2,4);
+	this.radius = randomBetween(1,3);
 	this.spawn = false;
 
 	this.catched = false;
@@ -294,7 +294,7 @@ function midSnow() {
 		this.spawn = true;
 		this.x = randomBetween(0, canvas.width);
 		this.y = randomBetween(0, canvas.height-500);
-		this.radius = randomBetween(2,4);
+		this.radius = randomBetween(1,3);
 	}
 
 	this.update = function() {
@@ -306,12 +306,12 @@ function midSnow() {
 
 			if (this.x < 0) {
 				this.x = canvas.width;
-				this.radius = randomBetween(2,4);
+				this.radius = randomBetween(1,3);
 			};
 
 			if (this.x > canvas.width) {
 				this.x = 0;
-				this.radius = randomBetween(2,4);
+				this.radius = randomBetween(1,3);
 			};
 
 			if (this.y > canvas.height) {
@@ -621,7 +621,6 @@ function Character() {
 			context.lineTo(this.x-33, this.y+200);
 			context.lineTo(this.x-31, this.y+180);
 			context.lineTo(this.x-60, this.y+210);
-
 			context.moveTo(this.x-5, this.y+145);
 			context.lineTo(this.x-25, this.y+150);
 			context.lineTo(this.x-45, this.y+130);
@@ -630,10 +629,8 @@ function Character() {
 			context.lineTo(this.x-25, this.y+150);
 			context.lineTo(this.x-45, this.y+165);
 			context.lineTo(this.x-50, this.y+155);
-
 			context.moveTo(this.x-45, this.y+165);
 			context.lineTo(this.x-60, this.y+210);
-
 			context.moveTo(this.x-31, this.y+180);
 			context.lineTo(this.x-45, this.y+165);
 			context.lineTo(this.x-25, this.y+166);
@@ -645,17 +642,13 @@ function Character() {
 			context.lineTo(this.x-23, this.y+260);
 			context.lineTo(this.x-55, this.y+265);
 			context.lineTo(this.x-39, this.y+240);
-
 			context.moveTo(this.x-40, this.y+220);
 			context.lineTo(this.x-60, this.y+210);
-
 			context.moveTo(this.x-55, this.y+265);
 			context.lineTo(this.x-40, this.y+290);
-
 			context.moveTo(this.x-23, this.y+260);
 			context.lineTo(this.x-40, this.y+290);
 			context.lineTo(this.x-50, this.y+320);
-
 			context.moveTo(this.x-50, this.y+320);
 			context.lineTo(this.x-30, this.y+310);
 			context.lineTo(this.x-23, this.y+260);
