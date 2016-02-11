@@ -643,11 +643,26 @@ function Character() {
 			context.lineTo(this.x-33, this.y+200);
 			context.lineTo(this.x-40, this.y+220);
 			context.lineTo(this.x-23, this.y+260);
-			context.lineTo(this.x-55, this.y+265);//
+			context.lineTo(this.x-55, this.y+265);
 			context.lineTo(this.x-39, this.y+240);
 
 			context.moveTo(this.x-40, this.y+220);
 			context.lineTo(this.x-60, this.y+210);
+
+			context.moveTo(this.x-55, this.y+265);
+			context.lineTo(this.x-40, this.y+290);
+
+			context.moveTo(this.x-23, this.y+260);
+			context.lineTo(this.x-40, this.y+290);
+			context.lineTo(this.x-50, this.y+320);
+
+			context.moveTo(this.x-50, this.y+320);
+			context.lineTo(this.x-30, this.y+310);
+			context.lineTo(this.x-23, this.y+260);
+			context.moveTo(this.x-30, this.y+310);
+			context.lineTo(this.x-23, this.y+336);
+			context.lineTo(this.x-16, this.y+310);
+			context.lineTo(this.x-30, this.y+310);
 		}
 
 	    context.fillStyle = "rgba(190, 200, 200, 1)";
