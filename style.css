@@ -16,7 +16,7 @@ audio {
 	position: absolute;
 	top: 90%;
 	left: 39%;
-	opacity: 0.1;
+	opacity: 0.05;
 
 	transition-property: opacity, margin-left;
     transition-duration: 1s;
@@ -32,12 +32,12 @@ audio:hover {
 }
 
 #playlist li a {
-	color: blue;
+	color: grey;
 	text-decoration: none;
 }
 
 #playlist .current-song a {
-	color: red;
+	color: yellow;
 }
 
 .player {
