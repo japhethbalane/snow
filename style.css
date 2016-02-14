@@ -26,3 +26,48 @@ audio {
 audio:hover {
 	opacity: 1.0;
 }
+
+#playlist {
+	list-style: none;
+}
+
+#playlist li a {
+	color: blue;
+	text-decoration: none;
+}
+
+#playlist .current-song a {
+	color: red;
+}
+
+.player {
+	height: 30%;
+	width: 17%;
+	position: absolute;
+	margin: 23% auto auto 1.5%;
+	opacity: 0.1;
+
+	transition-property: opacity;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+}
+
+.player:hover {
+	opacity: 1.0;
+}
+
+#msx {
+	margin-top: 4%;
+	opacity: 0.4;
+	font-family: Arial;
+
+	transition-property: opacity, margin-left, margin-top;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+
+#msx:hover {
+	opacity: 1.0;
+	margin-left: 5%;
+	/*margin-top: 2%;*/
+}

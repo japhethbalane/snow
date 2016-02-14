@@ -6,15 +6,37 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<audio src="audio/DisneyPianoCollection.mp3" controls></audio>
-	<audio src="audio/FoxRain.mp3"></audio>
-	<audio src="audio/LostMyMind.mp3"></audio>
-	<audio src="audio/PachelbelCanonD.mp3"></audio>
-	<audio src="audio/RiverFlowsInYou&KissTheRain.mp3"></audio>
-	<audio src="audio/RiverFlowsInYou.mp3"></audio>
-	<audio src="audio/TenderFeeling.mp3"></audio>
-	<audio src="audio/ThePersonIWillLove.mp3"></audio>
+	<audio src="" controls id="audioPlayer"></audio>
+	<div class="player">
+		<ul id="playlist">
+			<li id="msx" class="current-song"><a href="audio/DisneyPianoCollection.mp3">
+				DisneyPianoCollection
+			</a></li>
+			<li id="msx"><a href="audio/FoxRain.mp3">
+				FoxRain
+			</a></li>
+			<li id="msx"><a href="audio/LostMyMind.mp3">
+				LostMyMind
+			</a></li>
+			<li id="msx"><a href="audio/PachelbelCanonD.mp3">
+				PachelbelCanonD
+			</a></li>
+			<li id="msx"><a href="audio/RiverFlowsInYou&KissTheRain.mp3">
+				RiverFlowsInYou&KissTheRain
+			</a></li>
+			<li id="msx"><a href="audio/RiverFlowsInYou.mp3">
+				RiverFlowsInYou
+			</a></li>
+			<li id="msx"><a href="audio/TenderFeeling.mp3">
+				TenderFeeling
+			</a></li>
+			<li id="msx"><a href="audio/ThePersonIWillLove.mp3">
+				ThePersonIWillLove
+			</a></li>
+		</ul>
+	</div>
 	<canvas id = "snow"></canvas>
-	<script type="text/javascript" src="script.js"></script>
+	<script src="jquery.js"></script>
+	<script src="script.js"></script>
 </body>
 </html>
