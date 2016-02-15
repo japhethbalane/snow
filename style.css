@@ -16,7 +16,7 @@ audio {
 	position: absolute;
 	top: 90%;
 	left: 39%;
-	opacity: 0.05;
+	opacity: 0.1;
 
 	transition-property: opacity, margin-left;
     transition-duration: 1s;
@@ -24,7 +24,7 @@ audio {
 }
 
 audio:hover {
-	opacity: 1.0;
+	opacity: 1;
 }
 
 #playlist {
@@ -32,20 +32,22 @@ audio:hover {
 }
 
 #playlist li a {
-	color: grey;
+	color: white;
 	text-decoration: none;
+	font-size: 18px;
 }
 
 #playlist .current-song a {
-	color: yellow;
+	color: black;
 }
 
 .player {
-	height: 30%;
-	width: 17%;
+	height: 70%;
+	width: 20%;
 	position: absolute;
-	margin: 23% auto auto 1.5%;
-	opacity: 0.1;
+	margin: 1% auto auto 1.5%;
+	opacity: 0;
+	background-color: none;
 
 	transition-property: opacity;
     transition-duration: 1s;
@@ -53,15 +55,15 @@ audio:hover {
 }
 
 .player:hover {
-	opacity: 1.0;
+	opacity: 0.5;
 }
 
 #msx {
+	opacity: 0.5;
 	margin-top: 4%;
-	opacity: 0.4;
 	font-family: Arial;
 
-	transition-property: opacity, margin-left, margin-top;
+	transition-property: opacity, margin-left;
     transition-duration: 0.5s;
     transition-timing-function: ease;
 }
@@ -69,5 +71,4 @@ audio:hover {
 #msx:hover {
 	opacity: 1.0;
 	margin-left: 5%;
-	/*margin-top: 2%;*/
 }
