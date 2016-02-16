@@ -161,7 +161,7 @@ function updateWind() {
 function audioPlayer() {
 	var currentSong = 0;
 	$("#audioPlayer")[0].src = $("#playlist li a")[0];
-	$("#audioPlayer")[0].play();
+	// $("#audioPlayer")[0].play();
 	$("#playlist li a").click(function(e){
 		e.preventDefault();
 		$("#audioPlayer")[0].src = this;
@@ -469,7 +469,6 @@ function Character() {
 	}
 	this.drawLines = function() {
 		context.beginPath();
-
 		{
 			context.moveTo(this.x+15, this.y+40);
 			context.lineTo(this.x, this.y);context.lineTo(this.x-11, this.y+30);
@@ -490,7 +489,6 @@ function Character() {
 			context.lineTo(this.x-42, this.y+78);context.moveTo(this.x-28, this.y+92);
 			context.lineTo(this.x-45, this.y+90);
 		}
-
 		{
 			context.moveTo(this.x-5, this.y+140);
 			context.lineTo(this.x-18, this.y+120);context.lineTo(this.x-35, this.y+105);
@@ -504,7 +502,6 @@ function Character() {
 			context.lineTo(this.x+50, this.y+129);context.moveTo(this.x+30, this.y+121);
 			context.lineTo(this.x+10, this.y+120);context.lineTo(this.x+12, this.y+130);
 		}
-
 		{
 			context.moveTo(this.x-5, this.y+145);
 			context.lineTo(this.x+23, this.y+135);context.lineTo(this.x+25, this.y+125);
@@ -533,7 +530,6 @@ function Character() {
 			context.lineTo(this.x+24, this.y+191);context.lineTo(this.x+37, this.y+200);
 			context.moveTo(this.x+15, this.y+200);context.lineTo(this.x+6, this.y+216);
 		}
-
 		{
 			context.moveTo(this.x-60, this.y+210);
 			context.lineTo(this.x-23, this.y+260);context.lineTo(this.x-33, this.y+200);
@@ -557,7 +553,6 @@ function Character() {
 			context.lineTo(this.x-23, this.y+336);context.lineTo(this.x-16, this.y+310);
 			context.lineTo(this.x-30, this.y+310);
 		}
-
 	    context.fillStyle = "rgba(190, 200, 200, 1)";
 	    context.strokeStyle = "#eeeeee";
 	    context.fill();

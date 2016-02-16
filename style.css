@@ -41,7 +41,7 @@ audio:hover {
 	color: black;
 }
 
-.player {
+.playerArea {
 	height: 70%;
 	width: 20%;
 	position: absolute;
@@ -54,8 +54,8 @@ audio:hover {
     transition-timing-function: ease;
 }
 
-.player:hover {
-	opacity: 0.5;
+.playerArea:hover {
+	opacity: 1;
 }
 
 #msx {
