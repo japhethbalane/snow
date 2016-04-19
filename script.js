@@ -17,11 +17,11 @@ canvas.height = window.innerHeight;
 
 audioPlayer();
 
-generateNearSnow(1);
+generateNearSnow(10);
 
-generateMidSnow(20);
+generateMidSnow(50);
 
-generateFarSnow(20);
+generateFarSnow(100);
 
 generateCharacter();
 
@@ -161,7 +161,7 @@ function updateWind() {
 function audioPlayer() {
 	var currentSong = 0;
 	$("#audioPlayer")[0].src = $("#playlist li a")[0];
-	// $("#audioPlayer")[0].play();
+	$("#audioPlayer")[0].play();
 	$("#playlist li a").click(function(e){
 		e.preventDefault();
 		$("#audioPlayer")[0].src = this;

@@ -16,7 +16,7 @@ audio {
 	position: absolute;
 	top: 90%;
 	left: 39%;
-	opacity: 0.1;
+	opacity: 0;
 
 	transition-property: opacity;
     transition-duration: 1s;
@@ -35,6 +35,18 @@ audio:hover {
 	color: white;
 	text-decoration: none;
 	font-size: 18px;
+	opacity: 0.5;
+	font-family: Arial;
+	display: block;
+	padding: 2px;
+
+	transition-property: opacity, margin-left;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+
+#playlist li a:hover {
+	opacity: 1.0;
 }
 
 #playlist .current-song a {
@@ -56,19 +68,4 @@ audio:hover {
 
 .playerArea:hover {
 	opacity: 1;
-}
-
-#msx {
-	opacity: 0.5;
-	margin-top: 4%;
-	font-family: Arial;
-
-	transition-property: opacity, margin-left;
-    transition-duration: 0.5s;
-    transition-timing-function: ease;
-}
-
-#msx:hover {
-	opacity: 1.0;
-	margin-left: 2%;
 }
