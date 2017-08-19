@@ -15,8 +15,6 @@ var mouseX = canvas.width / 2;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-audioPlayer();
-
 generateNearSnow(10);
 
 generateMidSnow(50);
@@ -156,30 +154,6 @@ function randomBetween(min, max) {
 
 function updateWind() {
 	windSpeed = (((canvas.width/2) - mouseX) * (-1)) / 50;
-}
-
-function audioPlayer() {
-	var currentSong = 0;
-	$("#audioPlayer")[0].src = $("#playlist li a")[0];
-	$("#audioPlayer")[0].play();
-	$("#playlist li a").click(function(e){
-		e.preventDefault();
-		$("#audioPlayer")[0].src = this;
-		$("#audioPlayer")[0].play();
-		$("#playlist li").removeClass("current-song");
-		currentSong = $(this).parent().index();
-		$(this).parent().addClass("current-song");
-	});
-	$("#audioPlayer")[0].addEventListener("ended", function(e) {
-		currentSong++;
-		if (currentSong == $("#playlist li a").length) {
-			currentSong = 0;
-		};
-		$("#playlist li").removeClass("current-song");
-		$("#playlist li:eq("+currentSong+")").addClass("current-song");
-		$("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
-		$("#audioPlayer")[0].play();
-	});
 }
 
 ////////////////////////////////////////////////////////// Objects
